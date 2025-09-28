@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Sidebar from "./components/Sidebar";   // ⬅️ Yahin import karo
 import LeadsOverview from "./pages/LeadsOverview";
 import LeadCreationForm from "./pages/LeadCreationForm";
+import LeadDetails from "./pages/Lead_Details";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             {/* Pages */}
             <Route path="/leads_overview" element={<LeadsOverview />} />
             <Route path="/add_lead" element={<LeadCreationForm />} />
+            <Route path="/lead_detail/:id" element={<LeadDetails />} />
 
             {/* 404 fallback */}
             <Route

@@ -15,10 +15,12 @@ import {
   ChevronRight,
   ChevronDown,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const [leadsOpen, setLeadsOpen] = useState(false);
   const [active, setActive] = useState("dashboard");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -130,7 +132,10 @@ export default function Sidebar() {
                     ? "bg-gradient-to-r from-blue-600 to-blue-400"
                     : "bg-blue-600 hover:bg-blue-500"}
                 `}
-                onClick={() => setActive("leads-overview")}
+                onClick={() => {
+                  setActive("leads-overview");
+                  navigate("/leads_overview");
+                }}
               >
                 <Users className="mr-2" size={12} /> Leads Overview
               </button>

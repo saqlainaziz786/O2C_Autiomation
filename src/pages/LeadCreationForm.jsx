@@ -732,17 +732,20 @@ export default function LeadCreationForm() {
                 </label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                   {[
-                    { name: "New Lead", icon: "fas fa-user-plus", color: "bg-blue-500" },
-                    { name: "Contacted", icon: "fas fa-phone", color: "bg-blue-400" },
-                    { name: "Qualified", icon: "fas fa-handshake", color: "bg-blue-600" },
-                    { name: "Follow-up", icon: "fas fa-clock", color: "bg-blue-300" },
+                    { name: "New Lead", icon: "fas fa-user-plus", color: "bg-blue-500", active: "bg-blue-700" },
+                    { name: "Contacted", icon: "fas fa-phone", color: "bg-blue-400", active: "bg-blue-600" },
+                    { name: "Qualified", icon: "fas fa-handshake", color: "bg-blue-600", active: "bg-green-600" },
+                    { name: "Follow-up", icon: "fas fa-clock", color: "bg-blue-300", active: "bg-yellow-500" },
                   ].map((status) => (
                     <button
                       key={status.name}
                       type="button"
                       onClick={() => setSelectedStatus(status.name)}
-                      className={`flex items-center justify-center px-4 py-3 rounded-full text-white font-semibold text-xs sm:text-sm transition-all duration-300 ${status.color} ${selectedStatus === status.name ? "ring-4 ring-white shadow-lg scale-105" : "hover:scale-105"
-                        }`}
+                      className={`flex items-center justify-center px-4 py-3 rounded-full text-white font-semibold text-xs sm:text-sm transition-all duration-300
+          ${selectedStatus === status.name
+            ? `${status.active} ring-4 ring-white shadow-lg scale-105`
+            : `${status.color} hover:scale-105`
+          }`}
                     >
                       <i className={`${status.icon} mr-2`}></i>
                       {status.name}
@@ -758,20 +761,21 @@ export default function LeadCreationForm() {
                 </label>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
                   {[
-                    { name: "Qualified", icon: "fas fa-star", color: "bg-blue-600" },
-                    { name: "Hot Lead", icon: "fas fa-fire", color: "bg-blue-700" },
-                    { name: "Warm Lead", icon: "fas fa-thermometer-half", color: "bg-blue-500" },
-                    { name: "Cold Lead", icon: "fas fa-snowflake", color: "bg-blue-400" },
-                    { name: "Unqualified", icon: "fas fa-question", color: "bg-blue-300" },
+                    { name: "Qualified", icon: "fas fa-star", color: "bg-blue-600", active: "bg-green-600" },
+                    { name: "Hot Lead", icon: "fas fa-fire", color: "bg-blue-700", active: "bg-red-600" },
+                    { name: "Warm Lead", icon: "fas fa-thermometer-half", color: "bg-blue-500", active: "bg-yellow-500" },
+                    { name: "Cold Lead", icon: "fas fa-snowflake", color: "bg-blue-400", active: "bg-blue-900" },
+                    { name: "Unqualified", icon: "fas fa-question", color: "bg-blue-300", active: "bg-gray-500" },
                   ].map((qual) => (
                     <button
                       key={qual.name}
                       type="button"
                       onClick={() => setSelectedQualification(qual.name)}
-                      className={`flex items-center justify-center px-3 py-2 rounded-full text-white font-semibold text-xs sm:text-sm transition-all duration-300 ${qual.color} ${selectedQualification === qual.name
-                        ? "ring-4 ring-white shadow-lg scale-105"
-                        : "hover:scale-105"
-                        }`}
+                      className={`flex items-center justify-center px-3 py-2 rounded-full text-white font-semibold text-xs sm:text-sm transition-all duration-300
+          ${selectedQualification === qual.name
+            ? `${qual.active} ring-4 ring-white shadow-lg scale-105`
+            : `${qual.color} hover:scale-105`
+          }`}
                     >
                       <i className={`${qual.icon} mr-1 sm:mr-2`}></i>
                       {qual.name}

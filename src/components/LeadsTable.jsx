@@ -82,7 +82,7 @@ const LeadsTable = () => {
           </div>
           <button
             onClick={() => navigate("/add_lead")} // ✅ Redirect to /add_lead
-            className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow"
+            className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
           >
             <Plus className="mr-8" size={16} />
             Add New Lead
@@ -146,7 +146,12 @@ const LeadsTable = () => {
                         className="w-8 h-8 rounded-full"
                       />
                     )}
-                    {lead.name}
+                    <span
+                      className="cursor-pointer text-blue-700 hover:underline"
+                      onClick={() => navigate(`/lead_detail/${lead.id}`)}
+                    >
+                      {lead.name}
+                    </span>
                   </td>
                   <td className="py-3 px-4">{lead.phone}</td>
                   <td className="py-3 px-4 text-blue-600">{lead.email}</td>
@@ -180,7 +185,7 @@ const LeadsTable = () => {
                     <div className="flex gap-2">
                       <button
                         className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        onClick={() => navigate(`/lead_details/${lead.id}`)}
+                        onClick={() => navigate(`/lead_detail/${lead.id}`)}
                       >
                         <Eye size={14} />
                       </button>
