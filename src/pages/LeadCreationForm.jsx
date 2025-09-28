@@ -71,17 +71,64 @@ export default function LeadCreationForm() {
     }
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const missingFields = requiredFields.filter((field) => !formData[field].trim())
+  function getLeadSourceIconClass(source) {
+    switch (source) {
+      case "LinkedIn": return "fab fa-linkedin";
+      case "Facebook": return "fab fa-facebook";
+      case "WhatsApp": return "fab fa-whatsapp";
+      case "Telegram": return "fab fa-telegram";
+      case "Email": return "fas fa-envelope";
+      case "Phone": return "fas fa-phone";
+      case "Website": return "fas fa-globe";
+      case "Referral": return "fas fa-user-friends";
+      case "Event": return "fas fa-calendar";
+      default: return "";
+    }
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const missingFields = requiredFields.filter((field) => !formData[field].trim());
     if (missingFields.length > 0) {
-      alert("Please fill in all required fields.")
-      return
+      alert("Please fill in all required fields.");
+      return;
     }
 
-    alert("Lead created successfully!")
-    console.log("Form Data:", { ...formData, selectedStatus, selectedQualification, profileImage })
+    // Prepare lead object
+    const newLead = {
+      id: Date.now(),
+      name: `${formData.firstName} ${formData.lastName}`,
+      phone: formData.phone,
+      email: formData.email,
+      company: formData.companyName,
+      companyEmail: formData.companyEmail,
+      companyPhone: formData.companyPhone,
+      source: {
+        type: formData.leadSource,
+        iconClass: getLeadSourceIconClass(formData.leadSource), // Save only class name
+      },
+      industry: formData.industry,
+      icpScore: formData.icpScore,
+      owner: formData.assignOwner,
+      notes: formData.leadNotes,
+      status: selectedStatus,
+      projectedRevenue: formData.projectedRevenue,
+      actualRevenue: "",
+      employees: formData.companySize,
+      qualification: selectedQualification,
+      activityId: "",
+      engagement: formData.nextSteps,
+      avatar: profileImage,
+      location: formData.location,
+      companyWebsite: formData.companyWebsite,
+    };
+
+    // Save to localStorage
+    const savedLeads = JSON.parse(localStorage.getItem("leads")) || [];
+    localStorage.setItem("leads", JSON.stringify([...savedLeads, newLead]));
+
+    alert("Lead created successfully!");
+    window.location.href = "/leads_overview";
   }
 
   const saveDraft = () => {

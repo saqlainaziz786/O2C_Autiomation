@@ -84,7 +84,7 @@ const LeadsTable = () => {
             onClick={() => navigate("/add_lead")} // ✅ Redirect to /add_lead
             className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow"
           >
-            <Plus className="mr-2" size={16} />
+            <Plus className="mr-8" size={16} />
             Add New Lead
           </button>
         </div>
@@ -154,7 +154,11 @@ const LeadsTable = () => {
                   <td className="py-3 px-4">{lead.companyEmail}</td>
                   <td className="py-3 px-4">{lead.companyPhone}</td>
                   <td className="py-3 px-4 flex items-center gap-1">
-                    <span>{lead.source?.icon}</span>
+                    {lead.source?.iconClass && (
+                      <i
+                        className={lead.source.iconClass + " text-blue-500 mr-1"}
+                      ></i>
+                    )}
                     {lead.source?.type}
                   </td>
                   <td className="py-3 px-4">{lead.industry}</td>
