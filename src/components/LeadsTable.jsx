@@ -184,12 +184,15 @@ const LeadsTable = () => {
                   <td className="py-3 px-4">
                     <div className="flex gap-2">
                       <button
-                        className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
                         onClick={() => navigate(`/lead_detail/${lead.id}`)}
                       >
                         <Eye size={14} />
                       </button>
-                      <button className="p-2 bg-yellow-400 text-black rounded hover:bg-yellow-500">
+                      <button 
+                        className="p-2 bg-yellow-400 text-black rounded hover:bg-yellow-500"
+                        onClick={() => navigate(`/edit_lead/${lead.id}`)}
+                      >
                         <Edit size={14} />
                       </button>
                       <button
