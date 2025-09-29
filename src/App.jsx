@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";   // ⬅️ Yahin import karo
 import LeadsOverview from "./pages/LeadsOverview";
 import LeadCreationForm from "./pages/LeadCreationForm";
 import LeadDetails from "./pages/Lead_Details";
+import Engagement from "./components/Engagement";
 import EditLeadForm from "./pages/Edit_Lead";
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/add_lead" element={<LeadCreationForm />} />
             <Route path="/lead_detail/:id" element={<LeadDetails />} />
             <Route path="/edit_lead/:id" element={<EditLeadForm />} />
+            <Route path="/engagement" element={<Engagement />} />
 
             {/* 404 fallback */}
             <Route

@@ -9,7 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
-import DeleteConfirmationModal from "../pages/Delete_Lead"; // ✅ Import DeleteConfirmationModal
+import DeleteConfirmationModal from "./Delete_Lead"; // ✅ Import DeleteConfirmationModal
 
 const LeadsTable = () => {
   const [leads, setLeads] = useState([]);
@@ -207,14 +207,14 @@ const LeadsTable = () => {
                         <Eye size={14} />
                       </button>
                       <button 
-                        className="p-2 bg-yellow-400 text-black rounded hover:bg-yellow-500"
+                        className="p-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 cursor-pointer"
                         onClick={() => navigate(`/edit_lead/${lead.id}`)}
                       >
                         <Edit size={14} />
                       </button>
                       <button
                         onClick={() => handleDeleteClick(lead)}
-                        className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        className="p-2 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer"
                       >
                         <Trash2 size={14} />
                       </button>

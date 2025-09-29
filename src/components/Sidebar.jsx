@@ -145,7 +145,10 @@ export default function Sidebar() {
                     ? "bg-gradient-to-r from-blue-600 to-blue-400"
                     : "bg-blue-600 hover:bg-blue-500"}
                 `}
-                onClick={() => setActive("engagement")}
+                onClick={() => {
+                  setActive("engagement");
+                  navigate("/engagement");
+                }}
               >
                 <Handshake className="mr-2" size={12} /> Engagement
               </button>
