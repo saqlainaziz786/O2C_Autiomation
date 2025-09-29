@@ -9,10 +9,13 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
+import DeleteConfirmationModal from "../pages/Delete_Lead"; // ✅ Import DeleteConfirmationModal
 
 const LeadsTable = () => {
   const [leads, setLeads] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedLead, setSelectedLead] = useState(null);
   const navigate = useNavigate(); // ✅ Initialize navigate
 
   // ✅ Load saved leads from localStorage when component mounts
@@ -21,11 +24,25 @@ const LeadsTable = () => {
     setLeads(savedLeads);
   }, []);
 
-  // ✅ Delete function
-  const handleDelete = (leadId) => {
+  // ✅ Open delete modal function
+  const handleDeleteClick = (lead) => {
+    setSelectedLead(lead);
+    setShowDeleteModal(true);
+  };
+
+  // ✅ Close delete modal function
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setSelectedLead(null);
+  };
+
+  // ✅ Confirm delete function
+  const handleConfirmDelete = (leadId) => {
     const updatedLeads = leads.filter((lead) => lead.id !== leadId);
     setLeads(updatedLeads);
     localStorage.setItem("leads", JSON.stringify(updatedLeads)); // update storage
+    setShowDeleteModal(false);
+    setSelectedLead(null);
   };
 
   // ✅ Badge generator
@@ -196,7 +213,7 @@ const LeadsTable = () => {
                         <Edit size={14} />
                       </button>
                       <button
-                        onClick={() => handleDelete(lead.id)}
+                        onClick={() => handleDeleteClick(lead)}
                         className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
                       >
                         <Trash2 size={14} />
@@ -238,6 +255,15 @@ const LeadsTable = () => {
           </button>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && selectedLead && (
+        <DeleteConfirmationModal
+          lead={selectedLead}
+          onClose={handleCloseDeleteModal}
+          onConfirmDelete={handleConfirmDelete}
+        />
+      )}
     </div>
   );
 };
